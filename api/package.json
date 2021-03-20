@@ -1,12 +1,21 @@
 {
-  "name": "api",
+  "name": "mychsa_api",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple API to convert latitude/longitude coordinates into enclosing Community Health Service Areas.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "mocha --reporter spec"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Joe Taylor <joe@textninja.net>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2"
+  }
 }
