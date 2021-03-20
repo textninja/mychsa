@@ -1,0 +1,13 @@
+{
+  "name": "mychsa",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A simple web application to help BC residents identify Community Health Service Areas (CHSAs) from pairs of latitude/longitude coordinates",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Joe Taylor <joe@textninja.net>",
+  "license": "Apache-2.0"
+}
