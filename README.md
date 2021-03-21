@@ -39,7 +39,7 @@ is contained in its own docker container, which can be built and run
 independently, or as part of the `docker compose` toolchain outlined above (unless otherwise indicated).
 
  - [**api**](/api) - this API server, built on node/express, provides a thin wrapper
-  (with additional, case specific validation features) around calls to the public BC Geographic Warehouse API. Given a latitude/longitude pair (geopoint), it identifies the intersecting CHSA.
+  (with additional, application specific validation features) around calls to the BC Open Maps public API. Given a latitude/longitude pair (geopoint), it identifies the intersecting CHSA.
  - [**db**](/db) - a mariadb database to maintain a running log of calls to the above API.
  - [**frontend**](/frontend) - a React app bundled with webpack and deployed to a static apache server. Includes a couple of form controls to interact with the API.
  - [**e2e**](/e2e) - end to end tests for the frontend using a headless browser. Excluded from docker compose toolchain. Integrated with Github Actions, with usage instructions in README.
