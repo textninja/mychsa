@@ -12,4 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM httpd:2.4
+FROM node:15-buster-slim as buildstage
+RUN mkdir /app
+WORKDIR /app
+COPY package*.json .
+RUN npm ci
+COPY . .
+RUN npx webpack
+
+# Command to build and inspect:
+#
+#    docker build -t tmp . && docker run --rm -it tmp /bin/bash
+
+FROM httpd:2.4 as production
+
+COPY public /usr/local/apache2/htdocs
+COPY --from=buildstage /app/dist/main.js /usr/local/apache2/htdocs/main.js

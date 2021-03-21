@@ -1,0 +1,21 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Provides a react frontend with a couple of form controls to interact with the mychsa API.",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Joe Taylor <joe@textninja.net>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "webpack": "^5.27.1",
+    "webpack-cli": "^4.5.0"
+  },
+  "dependencies": {
+    "react": "^17.0.1"
+  }
+}
