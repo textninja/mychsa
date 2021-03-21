@@ -17,17 +17,14 @@ RUN mkdir /app
 WORKDIR /app
 COPY package*.json .
 
-FROM base as test
+FROM base
 RUN npm ci
 COPY . .
-CMD ["npm", "run", "test"]
-
-FROM base as prod
+RUN npm run test
 RUN npm ci --production
-COPY . .
 
 # CMD is `node index.js` instead of `npm start` because of idosyncracies
 # in how npm launches subprocesses. The dockerized node's `npm start`
 # command creates a subshell which intercepts signals and prevents them
 # from reaching our app.
-CMD ["node", "index.js"]
+CMD ["node", "index"]

@@ -25,6 +25,10 @@ chai.use(chaiHttp);
 
 describe('API', function() {
 
+  it('should fail', () => {
+    expect(1+1).to.equal(3);
+  });
+
   it('should respond with 404 at root', () => {
     chai.request(app).get('/').end(function (err, res) {
       res.status.should.equal(404);
@@ -46,12 +50,16 @@ describe('API', function() {
     });
   });
 
+  // lat lon combinations that should fail
   [
-    [{ lat: 0, lon: 0 }, "foo"],
-    [{ lat: 0, lon: 0 }, "foo"]
-  ].forEach(([{ lat, lon }, result]) => {
-    it(`should respond with ${result} for ${lat},${lon}`, () => {
-      console.log("Ok");
+    [{ lat: 0, lon: 0 }] // test null island
+  ]
+  .forEach(([{ lat, lon }, result]) => {
+    it(`should respond with error for ${lat},${lon}`, () => {
+      chai.request(app).get('/api/v1/chsa').end(function (err, res) {
+        let j = JSON.parse(res.text);
+        expect(j.errors).to.have.length.greaterThanOrEqual(2);
+      });
     });
   });
 
