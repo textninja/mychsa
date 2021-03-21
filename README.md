@@ -13,7 +13,7 @@ build this app from the command line using the following:
 
     docker-compose build
     
-The above command automatically runs all available unit tests, and will fail if any of the unit tests fail.
+The above command automatically runs all available unit tests (but **not** the end to end tests), and the build will fail if any defects are found.
 
 To run (or automatically build when run for the first time), use:
 
