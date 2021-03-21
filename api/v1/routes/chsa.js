@@ -14,6 +14,9 @@
  *  limitations under the License.
  */
 
+const { URLSearchParams } = require('url');
+const getChsaDataForLatLon = require('../lib/getchsadataforlatlon');
+
 module.exports = {
   get: async (req, res) => {
 
@@ -21,7 +24,7 @@ module.exports = {
 
     let success = false,
         errors = [],
-        result = {},
+        result = null,
         processedQueryParams = {}; // store lat/lon in numeric form
 
     const err = msg => errors.push(msg);
@@ -71,14 +74,15 @@ module.exports = {
 
       let { lat, lon } = processedQueryParams;
 
-      console.log(processedQueryParams);
+      let apiResult = await getChsaDataForLatLon(lat, lon);
 
-      success = true; // this will happen via http request
+      success = true;
+      result = JSON.parse(apiResult);
     }
 
 
     if (!errors.length && success) {
-      res.send(JSON.stringify({ success }));
+      res.send(JSON.stringify({ success, result }));
     } else {
       res.send(JSON.stringify({ success, errors }, null))
     }

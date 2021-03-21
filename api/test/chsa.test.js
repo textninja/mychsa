@@ -14,23 +14,46 @@
  *  limitations under the License.
  */
 
-
-const { expect } = require('chai');
-const api = require('../v1');
+const chai = require('chai');
+const chaiHttp = require("chai-http");
+const expect = chai.expect;
+const app = require('../app');
 const fetch = require('node-fetch');
 
-describe('Upstream API', () => {
-  
-});
+chai.should();
+chai.use(chaiHttp);
 
 describe('API', function() {
 
-  it('should exist', () => {
-    expect(api).to.exist;
+  it('should respond with 404 at root', () => {
+    chai.request(app).get('/').end(function (err, res) {
+      res.status.should.equal(404);
+    });
   });
 
-  it('should respond with error if latitude is missing', async () => {
 
+  it('should respond with 200 at /api/v1/chsa', () => {
+    chai.request(app).get('/api/v1/chsa').end(function (err, res) {
+      res.status.should.equal(200);
+    });
+  }); 
+
+
+  it('should respond with errors if no lat/lon params were provided', () => {
+    chai.request(app).get('/api/v1/chsa').end(function (err, res) {
+      let j = JSON.parse(res.text);
+      expect(j.errors).to.have.length.greaterThanOrEqual(2);
+    });
   });
+
+  [
+    [{ lat: 0, lon: 0 }, "foo"],
+    [{ lat: 0, lon: 0 }, "foo"]
+  ].forEach(([{ lat, lon }, result]) => {
+    it(`should respond with ${result} for ${lat},${lon}`, () => {
+      console.log("Ok");
+    });
+  });
+
 
 });

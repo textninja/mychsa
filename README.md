@@ -22,6 +22,16 @@ The app will be available by default at http://localhost:8080, or http://localho
 To tear down, and thus destroy all associated docker containers,
 including the database, run `docker compose down`.
 
+## Tracking API Calls
+
+Every time the API is called, it records a timestamp in a mariadb database. After running
+`docker compose up`, you can query this database for total API calls using the following command:
+
+    docker-compose exec db mysql -uapiaccess -papiaccess apiaccess -e "select count(id) as 'API Calls' from accesslogs"
+
+This assumes that the password is unchanged from the application default of "apiaccess".
+If you are using a different password, please substitute accordingly.
+
 ## Application architecture
 
 This application is composed of the following high-level components. Each component

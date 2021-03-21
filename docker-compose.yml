@@ -15,7 +15,9 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MYSQL_DATABASE: apiaccess
       MYSQL_USER: apiaccess
-      MYSQL_PASSWORD: apiaccess
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD:-apiaccess}"
+    volumes:
+      - ./db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/:ro
 
   frontend:
     build: frontend
