@@ -17,7 +17,7 @@ To run (and also to build, if that hasn't been done separately), use:
 
 The app will be available at http://localhost:8080.    
 
-To tear down, thus destroying all associated docker containers,
+To tear down, and thus destroy all associated docker containers,
 including the database, run `docker compose down`.
 
 ## Application architecture
