@@ -15,7 +15,7 @@
 FROM node:15-buster-slim as base
 RUN mkdir /app
 WORKDIR /app
-COPY package*.json .
+COPY package*.json ./
 
 FROM base
 RUN npm ci

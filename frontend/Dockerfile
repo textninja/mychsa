@@ -15,7 +15,7 @@
 FROM node:15-buster-slim as buildstage
 RUN mkdir /app
 WORKDIR /app
-COPY package*.json .
+COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npx webpack
