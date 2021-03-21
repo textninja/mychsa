@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "Provides a react frontend with a couple of form controls to interact with the mychsa API.",
-  "main": "src/index.jsx",
+  "main": "src/index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack serve",
+    "build": "webpack --mode=production",
+    "start": "webpack serve --mode=development",
     "test": "mocha"
   },
   "keywords": [],
@@ -17,10 +17,12 @@
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-react": "^7.12.13",
     "babel-loader": "^8.2.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
     "webpack": "^5.27.1",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   }
 }
