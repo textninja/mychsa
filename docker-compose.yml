@@ -13,8 +13,8 @@ services:
     restart: always
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_DATABASE: apiaccess
-      MYSQL_USER: apiaccess
+      MYSQL_DATABASE: "${MYSQL_DATABASE:-apiaccess}"
+      MYSQL_USER: "${MYSQL_USER:-apiaccess}"
       MYSQL_PASSWORD: "${MYSQL_PASSWORD:-apiaccess}"
     volumes:
       - ./db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/:ro
@@ -22,3 +22,13 @@ services:
   frontend:
     build: frontend
     restart: always
+
+  apiaccesstracker:
+    buid: apiaccesstracker
+    restart: always
+    environment:
+      MYCHSA_DB: "Server=db;Database=${MYSQL_DATABASE:-apiaccess};Uid=${MYSQL_USER:-apiaccess};Pwd=${MYSQL_PASSWORD:-apiaccess};"
+
+  # busy:
+  #   image: busybox
+  #   command: tail -F anything

@@ -27,4 +27,4 @@ RUN npx webpack
 FROM httpd:2.4 as production
 
 COPY public /usr/local/apache2/htdocs
-COPY --from=buildstage /app/dist/main.js /usr/local/apache2/htdocs/main.js
+COPY --from=buildstage /app/dist/* /usr/local/apache2/htdocs/

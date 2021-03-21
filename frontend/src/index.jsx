@@ -14,32 +14,7 @@
  *  limitations under the License.
  */
 
-const path = require('path');
+import { App } from './app';
+import ReactDOM from 'react-dom';
 
-module.exports = {
-  entry: './src/index.jsx',
-  mode: 'production',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        },
-        resolve: {
-          extensions: ['.js', '.jsx']
-        }
-      }
-    ]
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'devpublic'),
-    compress: true,
-    port: 9000
-  }
-};
+ReactDOM.render(<App/>, document.querySelector("#app"));
