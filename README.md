@@ -1,7 +1,7 @@
 # mychsa
 
-mychsa provides a simple web interface and API for identifying which
-Community Health Service Area (CHSA), if any, a latitude/longitude point
+mychsa provides a simple web interface and API for identifying the
+Community Health Service Area (CHSA) a latitude/longitude point
 intersects.
 
 ## Building and running
@@ -19,3 +19,4 @@ The app will be available at http://localhost:8080.
 
 To tear down, which will destroy all associated docker containers,
 including the database, run `docker compose down`.
+
