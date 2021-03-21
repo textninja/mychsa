@@ -15,13 +15,22 @@
  */
 
 
-
 const { expect } = require('chai');
+const api = require('../v1');
+const fetch = require('node-fetch');
+
+describe('Upstream API', () => {
+  
+});
 
 describe('API', function() {
 
-  it('should not exist yet', () => {
-    expect(1).to.equal(1);
+  it('should exist', () => {
+    expect(api).to.exist;
+  });
+
+  it('should respond with error if latitude is missing', async () => {
+
   });
 
 });

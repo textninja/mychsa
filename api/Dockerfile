@@ -12,16 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM node:15-buster-slim
+FROM node:15-buster-slim as base
 RUN mkdir /app
 WORKDIR /app
 COPY package*.json .
-RUN npm i --production --quiet
+
+FROM base as test
+RUN npm ci
+COPY . .
+CMD ["npm", "run", "test"]
+
+FROM base as prod
+RUN npm ci --production
 COPY . .
 
 # CMD is `node index.js` instead of `npm start` because of idosyncracies
 # in how npm launches subprocesses. The dockerized node's `npm start`
 # command creates a subshell which intercepts signals and prevents them
 # from reaching our app.
-
 CMD ["node", "index.js"]

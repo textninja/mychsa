@@ -23,18 +23,18 @@ const routes = Router();
 
 /**
  *
- * For every javascript in the ./routes directory,
- * create an endpoint at the corresponding relative path,
- * using exported callbacks named after http endpoints
+ * For every javascript file in the ./routes directory,
+ * create an endpoint at the corresponding relative path in the API router,
+ * using the exported callbacks named after http endpoints
  * (i.e. get, post, put, etc., but really only get at the moment)
  *
  * E.g. for ./routes/chsa.js, which has an export adhering to the
- * following structure, we create a route for GET requests to /chsa.
- * This can then be mounted, for example, at /api/v1/chsa
+ * following structure, we create a route for all GET requests to /chsa.
+ * This can then be mounted, for example, at /api/v1/chsa.
  * 
- * Example export structure:
+ * Example `module.exports` structure:
  * 
- *    { get: (req, res) => . . . }
+ *    { get:  (req, res) => . . . }
  *
  * @todo support endpoints that use http methods other than get
  */

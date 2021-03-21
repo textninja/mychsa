@@ -15,7 +15,7 @@
  */
 
 module.exports = {
-  get: (req, res) => {
+  get: async (req, res) => {
 
     res.header("Content-Type", "application/json");
 
@@ -46,7 +46,7 @@ module.exports = {
     if (typeof processedQueryParams.lat === "number") {
       if (processedQueryParams.lat < -90 ||
           processedQueryParams.lat > 90) {
-
+        err('invalid latitude');
       }
     }
 
@@ -54,7 +54,7 @@ module.exports = {
     if (typeof processedQueryParams.lon === "number") {
       if (processedQueryParams.lon < -180 ||
           processedQueryParams.lon > 180) {
-
+        err('invalid longitude');
       }
     }
 
