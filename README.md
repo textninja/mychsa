@@ -38,3 +38,7 @@ unit tests. These tests are written with mocha and chai.
 ## Continuous integration
 
 TODO Github actions are used to automatically run the end to end tests on Github's CI/CD platform.
+
+## Planned improvements
+
+ - log routing to elasticsearch with fluentd
