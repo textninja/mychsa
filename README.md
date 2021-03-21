@@ -15,7 +15,7 @@ To run (and build, if that hasn't been done already), use:
 
     docker compose up
 
-The app will then be exposed on localhost, port 8080.    
+The app will be available at http://localhost:8080.    
 
 To tear down, which will destroy all associated docker containers,
 including the database, run `docker compose down`.
