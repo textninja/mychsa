@@ -1,3 +1,5 @@
+[![CI](https://github.com/textninja/mychsa/actions/workflows/main.yml/badge.svg)](https://github.com/textninja/mychsa/actions/workflows/main.yml)
+
 # mychsa
 
 mychsa, from "My Community Health Service Area", provides a simple [web
@@ -10,6 +12,8 @@ Assuming docker and docker-compose (the sole dependencies) are installed locally
 build this app from the command line using the following:
 
     docker-compose build
+    
+The above command automatically runs all available unit tests (but **not** the end to end tests), and the build will fail if any defects are found.
 
 To run, use:
 
