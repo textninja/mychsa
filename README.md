@@ -45,15 +45,16 @@ independently, or as part of the `docker-compose` toolchain outlined above (unle
  - [**api**](/api) - this API server, built on node/express, provides a thin wrapper
   (with additional, application specific validation features) around calls to the BC Open Maps public API. Given a latitude/longitude pair (geopoint), it identifies the intersecting CHSA.
  - [**db**](/db) - a mariadb database to maintain a running log of calls to the above API.
- - [**frontend**](/frontend) - a React app bundled with webpack and deployed to a static apache server. Includes a couple of form controls to interact with the API.
- - [**e2e**](/e2e) - end to end tests for the frontend using a headless browser. Excluded from docker compose toolchain. Integrated with Github Actions, with usage instructions in README.
+ - [**apiaccesstracker**](/apiaccesstracker) - to keep the api as uncoupled as possible from the backing store, provides a restful endpoint to connect to the database and log the times of API calls.
+ - [**frontend**](/frontend) - a React app bundled with webpack then deployed to a static apache server. Includes a couple of form controls to interact with the API.
+ - [**e2e**](/e2e) - end to end tests for the frontend using a headless browser. Excluded from docker compose toolchain. Integration with Github Actions to follow.
 
-In addition to the end to end tests, the **api** and **db** containers include 
+In addition to the end to end tests, the api and frontend containers include 
 unit tests. These tests are written with mocha and chai.
 
 ## Continuous integration
 
-TODO Github actions are used to automatically run the end to end tests on Github's CI/CD platform.
+Github actions are used to automatically run the unit and end to end tests on Github's CI/CD platform. In order to conserve build minutes, the CI action is configured to be run manually rather than on push.
 
 ## Planned improvements
 
