@@ -7,6 +7,8 @@ services:
     restart: always
     ports:
       - "${PORT:-8080}:8080"
+    depends_on:
+      - apiaccesstracker
 
   db:
     build: db
@@ -22,12 +24,16 @@ services:
   frontend:
     build: frontend
     restart: always
+    depends_on:
+      - api
 
   apiaccesstracker:
     build: apiaccesstracker
     restart: always
     environment:
       MYCHSA_DB: "Server=db;Database=${MYSQL_DATABASE:-apiaccess};Uid=${MYSQL_USER:-apiaccess};Pwd=${MYSQL_PASSWORD:-apiaccess};"
+    depends_on:
+      - db
 
   # busy:
   #   image: busybox
