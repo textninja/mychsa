@@ -25,10 +25,6 @@ chai.use(chaiHttp);
 
 describe('API', function() {
 
-  it('should fail and give me a red banner on github', () => {
-    expect.to.fail();
-  });
-
   it('should respond with 404 at root', () => {
     chai.request(app).get('/').end(function (err, res) {
       res.status.should.equal(404);
