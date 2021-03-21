@@ -24,7 +24,7 @@ including the database, run `docker compose down`.
 
 This application is composed of the following high-level components. Each component
 is contained in its own docker container, which can be built and run
-independently, or (unless otherwise indicated) as part of the `docker compose` toolchain outlined above.
+independently, or as part of the `docker compose` toolchain outlined above (unless otherwise indicated).
 
  - [**api**](/api) - this API server, built on node/express, provides a thin wrapper
   (with additional, case specific validation features) around calls to the public BC Geographic Warehouse API. Given a latitude/longitude pair (geopoint), it identifies the intersecting CHSA.
