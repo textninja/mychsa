@@ -1,17 +1,17 @@
 # mychsa
 
-mychsa provides a simple web interface and API for identifying the
-Community Health Service Area (CHSA) a latitude/longitude point
-intersects.
+mychsa, from "My Community Health Service Area", provides a simple web
+interface and API to identify which Community Health Service Area (CHSA)
+is at a given latitude/longitude.
 
 ## Building and running
 
 Assuming docker (the sole dependency) is installed locally, you can
-(optionally) build this app from the command line using the following:
+build this app from the command line using the following:
 
     docker compose build
 
-To run (and build, if that hasn't been done already), use:
+To run (and also to build, if that hasn't been done separately), use:
 
     docker compose up
 
