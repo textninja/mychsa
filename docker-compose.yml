@@ -9,10 +9,13 @@ services:
       - 8080:8080
 
   db:
-    image: mariadb
+    build: db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: apiaccess
+      MYSQL_USER: apiaccess
+      MYSQL_PASSWORD: apiaccess
 
   # frontend:
   #   build: frontend
