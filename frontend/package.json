@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "mychsa_frontend",
   "version": "1.0.0",
   "private": true,
   "description": "Provides a react frontend with a couple of form controls to interact with the mychsa API.",
