@@ -4,19 +4,18 @@ mychsa provides a simple web interface and API for identifying which
 Community Health Service Area (CHSA), if any, a latitude/longitude point
 intersects.
 
-## Usage
+## Building and running
 
 Assuming docker (the sole dependency) is installed locally, you can
-build this app from the command line using the following:
+(optionally) build this app from the command line using the following:
 
     docker compose build
 
-To run, use:
+To run (and build, if that hasn't been done already), use:
 
     docker compose up
 
+The app will then be exposed on localhost, port 8080.    
+
 To tear down, which will destroy all associated docker containers,
 including the database, run `docker compose down`.
-
-
-The app will then be exposed on localhost, port 8080.
