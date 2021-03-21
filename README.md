@@ -7,12 +7,16 @@ intersects.
 ## Usage
 
 Assuming docker (the sole dependency) is installed locally, you can
-build this app using the following command:
+build this app from the command line using the following:
 
     docker compose build
 
-To run, use the following command:
+To run, use:
 
     docker compose up
+
+To tear down, which will stop and delete all associated docker containers,
+and clear the database, run `docker compose down`.
+
 
 The app will then be exposed on localhost, port 8080.
