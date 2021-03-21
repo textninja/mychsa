@@ -15,8 +15,8 @@ To run, use:
 
     docker compose up
 
-To tear down, which will stop and delete all associated docker containers,
-and clear the database, run `docker compose down`.
+To tear down, which will destroy all associated docker containers,
+including the database, run `docker compose down`.
 
 
 The app will then be exposed on localhost, port 8080.
