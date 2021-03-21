@@ -15,7 +15,9 @@ To run (and also to build, if that hasn't been done separately), use:
 
     docker compose up
 
-The app will be available at http://localhost:8080.    
+The app will be available by default at http://localhost:8080, or http://localhost:PORT if the `PORT` environment variable is set. For example, with the following bash command, the app will be available at http://localhost:3000:
+
+    PORT=3000 docker compose up
 
 To tear down, and thus destroy all associated docker containers,
 including the database, run `docker compose down`.

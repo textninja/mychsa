@@ -6,7 +6,7 @@ services:
     build: api
     restart: always
     ports:
-      - 8080:8080
+      - "${PORT:-8080}:8080"
 
   db:
     build: db
@@ -17,5 +17,6 @@ services:
       MYSQL_USER: apiaccess
       MYSQL_PASSWORD: apiaccess
 
-  # frontend:
-  #   build: frontend
+  frontend:
+    build: frontend
+    restart: always
