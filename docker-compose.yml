@@ -24,7 +24,7 @@ services:
     restart: always
 
   apiaccesstracker:
-    buid: apiaccesstracker
+    build: apiaccesstracker
     restart: always
     environment:
       MYCHSA_DB: "Server=db;Database=${MYSQL_DATABASE:-apiaccess};Uid=${MYSQL_USER:-apiaccess};Pwd=${MYSQL_PASSWORD:-apiaccess};"

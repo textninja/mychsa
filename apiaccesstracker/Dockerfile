@@ -20,8 +20,6 @@ COPY package*.json .
 FROM base
 RUN npm ci
 COPY . .
-RUN npm run test
-RUN npm ci --production
 
 # CMD is `node index.js` instead of `npm start` because of idosyncracies
 # in how npm launches subprocesses. The dockerized node's `npm start`

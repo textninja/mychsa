@@ -34,13 +34,13 @@ module.exports = {
     // params object
     recognizedParams.forEach(param => {
       if (typeof req.query[param] === "undefined") {
-        err(`the following parameter is required: ${param}`);
+        err(`The following parameter is required: ${param}`);
       } else {
         let latLonPattern = /^-?\d+(\.\d+)?$/;
         if (!latLonPattern.test(req.query[param])) {
-          err(`'${param}' should be a number`);
+          err(`'${param}' should be a number. Please ensure that ${param} does not include any non-numeric characters.`);
         } else {
-          processedQueryParams[param] = parseFloat(param);
+          processedQueryParams[param] = parseFloat(req.query[param]);
         }
       }
     });
@@ -49,7 +49,7 @@ module.exports = {
     if (typeof processedQueryParams.lat === "number") {
       if (processedQueryParams.lat < -90 ||
           processedQueryParams.lat > 90) {
-        err('invalid latitude');
+        err('Invalid latitude. Valid latitudes are numbers between -90 and 90.');
       }
     }
 
@@ -57,14 +57,14 @@ module.exports = {
     if (typeof processedQueryParams.lon === "number") {
       if (processedQueryParams.lon < -180 ||
           processedQueryParams.lon > 180) {
-        err('invalid longitude');
+        err('Invalid longitude. Valid longitudes are numbers between -180 and 180.');
       }
     }
 
     // trigger an error if there are any unrecognized parameters
     Object.keys(req.query).forEach(k => {
       if (!recognizedParams.includes(k)) {
-        err("unrecognized parameter: '" + encodeURIComponent(k) + "'");
+        err("Unrecognized parameter: '" + encodeURIComponent(k) + "'");
       }
     });    
 
@@ -76,8 +76,25 @@ module.exports = {
 
       let apiResult = await getChsaDataForLatLon(lat, lon);
 
-      success = true;
-      result = JSON.parse(apiResult);
+      try {
+        result = JSON.parse(apiResult);
+        if (!result.numberMatched) {
+          err("That point appears to be outside of BC. Please choose a latitude/longitude combination that is inside of BC and ensure that the latitude and longitude values haven't accidentally been switched.");
+        } else {
+          success = true;
+        }
+      } catch (e) {
+        err("An unknown error occurred."); // @todo the API probably returned XML instead, and that error message might be useful, but this is good enough for now
+      }
+
+      if (result.features &&
+          result.features.length &&
+          result.features[0].properties &&
+          result.features[0].properties.CMNTY_HLTH_SERV_AREA_NAME) {
+        result = result.features[0].properties.CMNTY_HLTH_SERV_AREA_NAME;
+      } else {
+        err("The upstream API returned an unexpected response. Please try again later or contact the website administrator.")
+      }
     }
 
 

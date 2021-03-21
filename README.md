@@ -11,7 +11,7 @@ build this app from the command line using the following:
 
     docker-compose build
 
-To run (and also to build, if that hasn't been done separately), use:
+To run (or automatically build when run for the first time), use:
 
     docker-compose up
 

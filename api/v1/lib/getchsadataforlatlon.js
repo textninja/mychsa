@@ -27,6 +27,8 @@ const fetch = require('node-fetch');
 async function getChsaDataForLatLon(lat, lon) {
   let params = new URLSearchParams;
 
+  console.log([lat, lon]);
+
   [
     ["service", "WFS"],
     ["version", "1.0.0"],
@@ -40,6 +42,8 @@ async function getChsaDataForLatLon(lat, lon) {
   ].forEach(([k,v]) => {
     params.set(k, v);
   });
+
+  console.log("Sending request to https://openmaps.gov.bc.ca/geo/pub/ows?" + params);
 
   let result = await fetch("https://openmaps.gov.bc.ca/geo/pub/ows?" + params);
 
