@@ -1,7 +1,7 @@
 # mychsa
 
-mychsa, from "My Community Health Service Area", provides a simple web
-interface and API to identify which Community Health Service Area (CHSA)
+mychsa, from "My Community Health Service Area", provides a simple [web
+interface](tree/main/e2e) and API to identify which Community Health Service Area (CHSA)
 is at a given latitude/longitude.
 
 ## Building and running
