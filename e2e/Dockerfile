@@ -15,4 +15,4 @@
 FROM alekzonder/puppeteer:1.20.0
 COPY package*.json /app/
 RUN npm ci
-COPY index.js /app/index.js
+COPY test /app/test

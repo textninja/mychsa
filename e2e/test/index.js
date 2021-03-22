@@ -16,24 +16,43 @@
 
 const puppeteer = require('puppeteer');
 const targetUrl = process.env.MYCHSA_E2E_TARGET;
+const { expect } = require('chai');
 
-(async () => {
+describe('frontend', async () => {
 
-  const browser = await puppeteer.launch({
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox'
-    ]
+  let browser;
+  let page;
+
+  before(async () => {
+
+    browser = await puppeteer.launch({
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox'
+      ]
+    });
+
+    page = await browser.newPage();
+
+    await page.goto(targetUrl, { "waitUntil": "networkidle2" });
+
   });
 
-  const page = await browser.newPage();
-  await page.goto(targetUrl, { waitUntil: "networkidle2" });
+  it('should have content', async () => {
+    let content = await page.content();
+    expect(content).to.exist;
+  });
 
-  let content = await page.content();
+  it('should have the correct title', async () => {
+    let title = await page.title();
+    expect(title).to.equal("mychsa - Find your Community Health Service Area (CHSA)");
+  });
 
-  console.log(content);
+  it('should not have the wrong title', async () => {
+    let title = await page.title();
+    expect(title).to.not.equal("something else");
+  });
 
-  await browser.close();
+  after(async () => await browser.close());
 
-
-})();
+});

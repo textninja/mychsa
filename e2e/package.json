@@ -4,6 +4,7 @@
   "description": "Uses puppeteer to run end to end tests against MYCHSA front-end",
   "main": "index.js",
   "dependencies": {
+    "chai": "^4.3.4",
     "mocha": "^8.3.2"
   },
   "scripts": {
