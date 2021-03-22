@@ -61,7 +61,7 @@ independently with ad hoc docker commands, or (except as indicated) be spun up a
  - [**db**](/db) - a mariadb database to maintain a running log of calls to the above API.
  - [**apiaccesstracker**](/apiaccesstracker) - to keep the api as loosely coupled from the backing store as possible, a RESTful endpoint was created which connects to the database above and logs API access times and counts.
  - [**frontend**](/frontend) - a React app bundled with webpack then deployed to a static apache server. Includes a couple of form controls to interact with the API.
- - [**e2e**](/e2e) - end to end tests for the frontend using a headless browser (puppeteer). Excluded from docker compose toolchain. Integration with Github Actions to follow.
+ - [**e2e**](/e2e) - end to end tests for the frontend using a headless browser (puppeteer). Excluded from docker compose toolchain. Run automatically by GitHub CI.
 
 In addition to end to end tests, there are unit tests for the api server. These tests are written with mocha and chai.
 
