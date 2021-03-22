@@ -153,7 +153,7 @@ function handleSubmit(state, setState) {
       setState(current => ({ ...current, latitude: submittedLatitude, longitude: submittedLongitude, loading: false, response }));
     });
 
-    return { ...current, submittedLatitude, submittedLongitude, loading: true };
+    return { ...current, submittedLatitude, submittedLongitude, response: {}, loading: true };
 
   });
 }
