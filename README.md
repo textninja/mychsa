@@ -57,10 +57,12 @@ The build and run commands specified above are influenced by the following envir
 
   - `MYCHSA_MYSQL_PASSWORD` - Default value is `changeifyouwant`
   - `MYCHSA_PORT` - Configures the port the web server is accessible from. Default value is `8080`
+  - `MYCHSA_API_PORT` - Configured the port the locally spun up web server's API is bound to. Default is `8888`.
+  - `MYCHSA_API_URL` - Configured the API URL the web interface makes requests to. Defaults to `http://localhost:8888`. In general, this should correspond to MYCHSA_API_PORT above.
 
 ## Continuous integration
 
-Github actions are used to automatically run the unit and end to end tests on Github's CI/CD platform. In order to conserve build minutes, the CI action is configured to be run manually rather than on push.
+Github actions are used to automatically run the unit tests and end to end tests on Github's CI/CD platform. In order to conserve build minutes, the CI action is configured to be run manually rather than on push.
 
 ## Planned improvements
 

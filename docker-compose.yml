@@ -8,7 +8,7 @@ services:
     environment:
       APIACCESS_ENDPOINT: "http://apiaccesstracker:8080/accessevent"
     ports:
-      - 8888:8080
+      - "${MYCHSA_API_PORT}:8080"
     depends_on:
       - apiaccesstracker
 
@@ -27,7 +27,7 @@ services:
     build: frontend
     restart: always
     environment:
-      API_URL: "http://localhost:8888"
+      API_URL: "${MYCHSA_API_URL}"
     ports:
       - "${MYCHSA_PORT}:80"
     depends_on:
