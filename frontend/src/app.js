@@ -15,6 +15,7 @@
  */
 
 import React, { useState } from 'react';
+import './app.css';
 
 export const App = () => {
 
@@ -27,24 +28,47 @@ export const App = () => {
     );
   };
 
+  // I'd rather keep the submit button enabled in all cases, so this isn't used
+  // in the JSX, but it's here if I change my mind...
+  var submitDisabled = true;
+
+  const validationErrors = {
+    latitude: null,
+    longitude: null
+  };
+
+  ["latitude", "longitude"].forEach(p => {
+
+    if (!state[p]) {
+      validationErrors[p] = `Enter a ${p}`;
+      return; // not provided. don't enable submit button.
+    } if (isNaN(state[p])) {
+      validationErrors[p] = `${p[0].toUpperCase() + p.substr(1)} should be a number`;
+      return;
+    }
+
+    submitDisabled = false;
+
+  });
+
   return (<>
     <h1>mychsa</h1>
-    <p class="subtitle">Find your Community Health Service Area</p>
+    <p className="subtitle">Find your Community Health Service Area</p>
 
     <div>
-      <div>
-        <label>Latitude:</label>
+      <div className="field-row">
         <input type="text" value={state.latitude}
           name="latitude"
           onChange={setStateAccordingly} />
+        <div className={validationErrors.latitude?"":"ready"}>{validationErrors.latitude || ["Enter a latitude ",<span>✅</span>]}</div>
       </div>
-      <div>
-        <label>Longitude:</label>
+      <div className="field-row">
         <input type="text" value={state.longitude}
           name="longitude"
           onChange={setStateAccordingly} />
+        <div className={validationErrors.longitude?"":"ready"}>{validationErrors.longitude || ["Enter a longitude ",<span>✅</span>]}</div>
       </div>
-      <input type="button" value="Submit"/>
+      <input type="button" value="Submit" />
     </div>
   </>);
 };

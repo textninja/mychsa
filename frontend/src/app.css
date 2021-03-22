@@ -1,0 +1,12 @@
+.field-row {
+  margin-bottom: 1em;
+  line-height: 1.5em;
+}
+
+.field-row span {
+  font-size: 0.8em;
+}
+
+div.ready {
+  color: green;
+}
