@@ -18,7 +18,9 @@ const puppeteer = require('puppeteer');
 const targetUrl = process.env.MYCHSA_E2E_TARGET;
 const { expect } = require('chai');
 
-describe('frontend', async () => {
+describe('frontend', async function() {
+
+  this.timeout(10000); 
 
   let browser;
   let page;
@@ -34,7 +36,7 @@ describe('frontend', async () => {
 
     page = await browser.newPage();
 
-    await page.goto(targetUrl, { "waitUntil": "networkidle2", timeout: 12000 });
+    await page.goto(targetUrl, { "waitUntil": "networkidle2", timeout: 8000 });
 
   });
 
