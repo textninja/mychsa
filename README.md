@@ -19,7 +19,7 @@ To run, use:
 
     docker-compose up
 
-The app will be available at http://localhost:8080, unless the `MYCHSA_PORT` environment variable is set, in which case it will be available at http://localhost:MYCHSA_PORT. For example, with the following bash command, the app will be available at http://localhost:3000:
+The app will be available at http://localhost:8080, unless the `MYCHSA_PORT` environment variable is set, in which case it will be available at http://localhost:MYCHSA_PORT. For example, with the following shell command, the app will be available at http://localhost:3000:
 
     MYCHSA_PORT=3000 docker-compose up
 
@@ -35,7 +35,7 @@ Running `docker-compose up` will also start an API server. This server is starte
     GET http://localhost:8888/api/v1/chsa
     {"success":false,"errors":["The following parameter is required: lat","The following parameter is required: lon"]}
     
-After the app is built, you can run the suite of end-to-end tests locally if you choose. More details are in the [**e2e**](/e2e) service's readme. These tests are run as part of the GitHub CI action.
+After the app is built, you can run the suite of end-to-end tests locally if you choose. More details are in the [**e2e**](/e2e) service's README. These tests are run as part of the GitHub Action CI workflow.
 
 ## Tear Down
 
@@ -65,7 +65,7 @@ independently with ad hoc docker commands, or (except as indicated) be spun up a
  - [**frontend**](/frontend) - a React app bundled with webpack then deployed to a static apache server. Includes a couple of form controls to interact with the API.
  - [**e2e**](/e2e) - end to end tests for the frontend using a headless browser (puppeteer). Excluded from docker compose toolchain. Run automatically by GitHub CI.
 
-In addition to end to end tests, there are unit tests for the api server. These tests are written with mocha and chai.
+In addition to end to end tests, there are unit tests for the api server. These tests are written using the mocha and chai libraries.
 
 ## Environment variables
 
