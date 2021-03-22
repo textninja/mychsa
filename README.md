@@ -19,11 +19,11 @@ To run, use:
 
     docker-compose up
 
-The app will be available at http://localhost:8080. If the `MYCHSA_PORT` environment variable is set, it will be available at http://localhost:MYCHSA_PORT. For example, with the following bash command, the app will be available at http://localhost:3000:
+The app will be available at http://localhost:8080, unless the `MYCHSA_PORT` environment variable is set, in which case it will be available at http://localhost:MYCHSA_PORT. For example, with the following bash command, the app will be available at http://localhost:3000:
 
     MYCHSA_PORT=3000 docker-compose up
 
-To tear down, and thus destroy all associated docker containers, run `docker-compose down`. Note that the database volume will be preserved. If you would like to delete the database completely, use `docker-compose down -v` instead.
+To tear down, and thus destroy all associated docker containers, run `docker-compose down`. Note that the database volume will be preserved. If you would like to destroy the database completely (delete the volume on teardown), use `docker-compose down -v` instead.
 
 ## Tracking API Calls
 
@@ -33,7 +33,9 @@ Every time the API is called, it records a timestamp in a mariadb database. Afte
     docker-compose exec db mysql -uapi -pchangeifyouwant api -e "select count(id) as 'API Calls' from accesslogs"
 
 This assumes that the password is unchanged from the application default of "changeifyouwant".
-If you are using a different password, please substitute accordingly.
+If you are using a different password, please substitute accordingly; in general, inlining passwords in the shell is not recommended, so if you have configured a secure password then the recommended approach is to use the following command instead:
+
+    docker-compose exec db mysql -uapi -p api -e "select count(id) as 'API Calls' from accesslogs"
 
 ## Application architecture
 
