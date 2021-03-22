@@ -82,3 +82,4 @@ Github actions are used to automatically run the unit tests and end to end tests
 ## Planned improvements
 
  - log routing to elasticsearch with fluentd
+ - lots more...
