@@ -23,7 +23,7 @@ The app will be available at http://localhost:8080, unless the `MYCHSA_PORT` env
 
     MYCHSA_PORT=3000 docker-compose up
 
-In addition to the web client, an API server is started at on port 8888, unless the `MYCHSA_API_PORT` environment variable specifies a different port to bind to. This API provides an endpoint at http://localhost:8888/api/v1/chsa?lat=0&lon=0, where lat and lon are numbers which indicate a geopoint within BC. A few example calls and responses are shown below.
+Running `dockker-compose up` will also start an API server. This server is started on port 8888, unless the `MYCHSA_API_PORT` environment variable specifies a different port to bind to. The API provides an endpoint at http://localhost:8888/api/v1/chsa?lat=0&lon=0, where lat and lon are numbers which indicate a geopoint within BC. A few example calls and responses are shown below.
 
 
     GET http://localhost:8888/api/v1/chsa?lat=34&lon=42
