@@ -34,6 +34,8 @@ Running `docker-compose up` will also start an API server. This server is starte
 
     GET http://localhost:8888/api/v1/chsa
     {"success":false,"errors":["The following parameter is required: lat","The following parameter is required: lon"]}
+    
+After the app is built, you can run the suite of end-to-end tests locally if you choose. More details are in the [**e2e**](/e2e) service's readme. These tests are run as part of the GitHub CI action.
 
 ## Tear Down
 
