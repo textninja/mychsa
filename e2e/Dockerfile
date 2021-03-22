@@ -12,4 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM buildkite/puppeteer:8.0.0
+FROM alekzonder/puppeteer:1.20.0
+COPY package*.json /app/
+RUN npm ci
+COPY index.js /app/index.js

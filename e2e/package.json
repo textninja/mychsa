@@ -1,0 +1,15 @@
+{
+  "name": "mychsa_e2e",
+  "version": "1.0.0",
+  "description": "Runs end to end tests against frontend",
+  "main": "index.js",
+  "dependencies": {
+    "mocha": "^8.3.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "Joe Taylor <joe@textninja.net>",
+  "license": "Apache-2.0"
+}
