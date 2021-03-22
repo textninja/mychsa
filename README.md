@@ -23,6 +23,23 @@ The app will be available at http://localhost:8080, unless the `MYCHSA_PORT` env
 
     MYCHSA_PORT=3000 docker-compose up
 
+In addition to the web client, an API server is started at on port 8888, unless the `MYCHSA_API_PORT` environment variable specifies a different one. This API provides the endpoint http://localhost:8888/api/v1/chsa?lat=0&lon=0, where lat and lon are numbers which indicate a geopoint within BC. A few example calls and responses are shown below.
+
+
+    GET http://localhost:8888/api/v1/chsa?lat=34&lon=42
+
+    {"success":false,"errors":["That point appears to be outside of BC. Please choose a latitude/longitude combination that is inside of BC and ensure that the latitude and longitude values haven't accidentally been switched."]}
+
+
+    GET http://localhost:8888/api/v1/chsa?lat=49.2762041&lon=-123.1269395
+    {"success":true,"result":"Downtown Vancouver"}
+
+    GET http://localhost:8888/api/v1/chsa
+    {"success":false,"errors":["The following parameter is required: lat","The following parameter is required: lon"]}
+
+
+## Tear Down
+
 To tear down, and thus destroy all associated docker containers, run `docker-compose down`. Note that the database volume will be preserved. If you would like to destroy the database completely (delete the volume on teardown), use `docker-compose down -v` instead.
 
 ## Tracking API Calls
@@ -34,6 +51,7 @@ Every time the API is called, it records a timestamp in a mariadb database. Afte
 
 This assumes that the password is unchanged from the application default of "changeifyouwant".
 If you are using a different password, please substitute accordingly; in general, inlining passwords in the shell is discouraged, so if you have configured a secure password then the recommended approach is to replace `-pchangeifyouwant` with `-p` (that is, with no password specified). You will be prompted for your password in a secure input.
+
 
 ## Application architecture
 
