@@ -48,16 +48,48 @@ describe('API', function() {
 
   // lat lon combinations that should fail
   [
-    [{ lat: 0, lon: 0 }] // test null island
+    [{ lat: 0, lon: 0 }], // test null island
+    [{ lat: "asdf", lon: "foobar" }], // garbage input
+    [{ lat: 51.613105869480606, lon: -129.16662513534297}] // out at sea
   ]
   .forEach(([{ lat, lon }, result]) => {
     it(`should respond with error for ${lat},${lon}`, () => {
-      chai.request(app).get('/api/v1/chsa').end(function (err, res) {
+      chai.request(app).get(`/api/v1/chsa?lat=${lat}&lon=${lon}`).end(function (err, res) {
         let j = JSON.parse(res.text);
-        expect(j.errors).to.have.length.greaterThanOrEqual(2);
+        expect(j.errors).to.have.length.greaterThanOrEqual(1);
       });
     });
   });
+
+
+  // spot test a couple of locations
+  [
+    [
+      "/api/v1/chsa?lat=52.37254609262492&lon=-126.75565124477541",
+      {"success":true,"result":"Bella Coola Valley"}
+    ],
+
+    [
+      "/api/v1/chsa?lat=53.64491982000028&lon=-123.3486644999843",
+      {"success":true,"result":"Prince George Southwest Rural"}
+    ]    
+  ]
+  .forEach( 
+    ([path, expectedResult]) => {
+
+      it(`should return the correct value for ${path}`, () => {
+
+        chai.request(app).get(path).end(function (err, res) {
+
+          let j = JSON.parse(res.text);
+          expect(j).to.deep.equal(expectedResult);
+
+        });
+
+      });
+
+    }
+  );
 
 
 });
