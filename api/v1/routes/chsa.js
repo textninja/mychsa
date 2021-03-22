@@ -39,6 +39,10 @@ module.exports = {
 
     const err = msg => errors.push(msg);
     const recognizedParams = ["lat", "lon"];
+    const friendlyName = {
+      lat: "Latitude",
+      lon: "Longitude"
+    }
 
     // validate contents of lat/lon params and add to processed
     // params object
@@ -48,7 +52,7 @@ module.exports = {
       } else {
         let latLonPattern = /^-?\d+(\.\d+)?$/;
         if (!latLonPattern.test(req.query[param])) {
-          err(`'${param}' should be a number. Please ensure that ${param} does not include any non-numeric characters.`);
+          err(`${friendlyName[param]} should be a number. Please ensure that ${friendlyName[param].toLowerCase()} does not include any non-numeric characters.`);
         } else {
           processedQueryParams[param] = parseFloat(req.query[param]);
         }
