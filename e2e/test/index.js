@@ -53,6 +53,18 @@ describe('frontend', async () => {
     expect(title).to.not.equal("something else");
   });
 
+  it('should display a couple of form controls', async () => {
+
+    let controls = await page.evaluate(() => {
+      return document.querySelectorAll("input");
+    });
+
+    console.log(controls);
+
+    throw "this one needs to fail";
+
+  });
+
   after(async () => await browser.close());
 
 });
