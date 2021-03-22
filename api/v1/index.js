@@ -15,6 +15,7 @@
  */
 
 const { Router } = require('express');
+const cors = require('cors');
 const glob = require('glob');
 const path = require('path');
 
@@ -42,13 +43,14 @@ const routes = Router();
 let routeDir = path.resolve(path.join(__dirname, "routes"));
 let routeFiles = glob.sync(`${routeDir}/**/*.js`);
 
+
 routeFiles.forEach((file) => {
   const routeData = require(file);
   const routePath = file.substr(routeDir.length).slice(0,-3);
 
 
   if (routeData.get) {
-    routes.get(routePath, routeData.get);
+    routes.get(routePath, cors(), routeData.get);
   }
 });
 

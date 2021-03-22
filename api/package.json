@@ -12,6 +12,7 @@
   "author": "Joe Taylor <joe@textninja.net>",
   "license": "Apache-2.0",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "glob": "^7.1.6",
     "node-fetch": "^2.6.1"
