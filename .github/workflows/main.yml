@@ -12,3 +12,6 @@ jobs:
       
       - name: Build docker images
         run: docker-compose build
+        
+      - name: Run e2e tests
+        run: docker-compose up -d && source e2e/run_e2e.sh
