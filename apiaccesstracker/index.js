@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 
-app.get("/accessevent", (req, res) => {
+app.post("/accessevent", (req, res) => {
 
   var connection = mysql.createConnection({
     host     : process.env.MYSQL_HOST,
@@ -14,13 +14,15 @@ app.get("/accessevent", (req, res) => {
 
   connection.connect();
   connection.query("insert into accesslogs (time) values (now());", (err,results) => {
-    res.send("successfully posted access event");    
+    console.log("api access event received");
+    res.set("Content-Type", "application/json");
+    res.send("{ success: true }");    
     connection.end();    
   });
 
 });
 
-app.listen(8080, () => {
+let server = app.listen(8080, () => {
   console.log("Listening on port 8080");
 });
 

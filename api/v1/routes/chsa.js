@@ -21,6 +21,15 @@ const fetch = require('node-fetch');
 module.exports = {
   get: async (req, res) => {
 
+    // send "beacon" (full request) to the apiaccess tracking service if specified
+    if (process.env.APIACCESS_ENDPOINT) {
+      try {
+        await fetch(process.env.APIACCESS_ENDPOINT, { method: "POST" }); // we don't concern ourselves with the result, but let's wait for it to complete
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
     res.header("Content-Type", "application/json");
 
     let success = false,

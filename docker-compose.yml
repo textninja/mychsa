@@ -42,7 +42,5 @@ services:
       MYSQL_USER: api
       MYSQL_PASSWORD: "${MYCHSA_MYSQL_PASSWORD}"      
       MYSQL_PORT: 3306
-    ports:
-      - 8889:8080
     depends_on:
       - db

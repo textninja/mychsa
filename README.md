@@ -23,7 +23,7 @@ The app will be available at http://localhost:8080. If the `MYCHSA_PORT` environ
 
     MYCHSA_PORT=3000 docker-compose up
 
-To tear down, and thus destroy all associated docker containers, including the database, run `docker-compose down`.
+To tear down, and thus destroy all associated docker containers, run `docker-compose down`. Note that the database volume will be preserved. If you would like to delete the database completely, use `docker-compose down -v` instead.
 
 ## Tracking API Calls
 
@@ -44,7 +44,7 @@ independently with ad hoc docker commands, or (unless otherwise indicated,) spun
  - [**api**](/api) - this API server, built on node/express, provides a thin wrapper
   (with additional, application specific validation features) around calls to the BC Open Maps public API. Given a latitude/longitude pair (geopoint), it identifies the intersecting CHSA.
  - [**db**](/db) - a mariadb database to maintain a running log of calls to the above API.
- - [**apiaccesstracker**](/apiaccesstracker) - to keep the api as loosely coupled as possible from the backing store, a restful endpoint was created to connect to the database above and log  API access times and counts.
+ - [**apiaccesstracker**](/apiaccesstracker) - to keep the api as loosely coupled from the backing store as possible, a RESTful endpoint was created which connects to the database above and logs API access times and counts.
  - [**frontend**](/frontend) - a React app bundled with webpack then deployed to a static apache server. Includes a couple of form controls to interact with the API.
  - [**e2e**](/e2e) - end to end tests for the frontend using a headless browser. Excluded from docker compose toolchain. Integration with Github Actions to follow.
 
