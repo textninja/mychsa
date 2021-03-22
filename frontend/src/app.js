@@ -16,10 +16,19 @@
 
 import React, { useState } from 'react';
 import './app.css';
+import { ErrorList } from './ErrorList.js';
+import { getApiResponse } from './get_api_response.js';
+
 
 export const App = () => {
 
-  let [state, setState] = useState({latitude:"", longitude:""});
+  let [state, setState] = useState({
+    latitude:"",
+    longitude:"",
+    submittedLatitude: null,
+    submittedLongitude: null,
+    response: {}
+  });
 
   // sets state according to onChange event properties
   const setStateAccordingly = e => {
@@ -34,12 +43,12 @@ export const App = () => {
 
   const validationErrors = {
     latitude: null,
-    longitude: null
+    longitude: null    
   };
 
   ["latitude", "longitude"].forEach(p => {
 
-    if (!state[p]) {
+    if (!state[p] || state[p] === "-") {
       validationErrors[p] = `Enter a ${p}`;
       return; // not provided. don't enable submit button.
     } if (isNaN(state[p])) {
@@ -47,28 +56,104 @@ export const App = () => {
       return;
     }
 
+    let n = parseFloat(state[p]);
+
+    switch (p) {
+      case "latitude":
+        if (n < -90 || n > 90) {
+          validationErrors[p] = "Latitude should be between -90 and 90";
+        }
+        break;
+
+      case "longitude":
+        if (n < -180 || n > 180) {
+          validationErrors[p] = "Longitude should be between -180 and 180";
+        }      
+        break;
+    }
+    
+
     submitDisabled = false;
 
   });
+
+  function hideExtras() {
+    return state.submittedLatitude === null ||
+      state.submittedLongitude === null ||
+      state.submittedLongitude != state.longitude ||
+      state.submittedLatitude != state.latitude;
+  }
+
+  function chsaInfo() {
+    if (state.loading) {
+      return <em>loading...</em>;
+    }
+
+    if (hideExtras()) {
+      return <em>(click submit to find)</em>;
+    }
+
+    if (state.response && state.response.success && state.response.result) {
+
+      return <strong>{state.response.result}</strong>;
+
+    } else if (state.response && state.response.errors) {
+
+      return <strong>No CHSA found for that location. Please see errors below.</strong>;
+
+    } else {
+
+      return <em>(click submit to find)</em>;
+
+    }
+
+  }
+
 
   return (<>
     <h1>mychsa</h1>
     <p className="subtitle">Find your Community Health Service Area</p>
 
-    <div>
+    <form onSubmit={e => e.preventDefault()}>
       <div className="field-row">
         <input type="text" value={state.latitude}
           name="latitude"
           onChange={setStateAccordingly} />
-        <div className={validationErrors.latitude?"":"ready"}>{validationErrors.latitude || ["Enter a latitude ",<span>✅</span>]}</div>
+        <div className={validationErrors.latitude?"":"ready"}>{validationErrors.latitude || <>Enter a latitude <span>✅</span></>}</div>
       </div>
       <div className="field-row">
         <input type="text" value={state.longitude}
           name="longitude"
           onChange={setStateAccordingly} />
-        <div className={validationErrors.longitude?"":"ready"}>{validationErrors.longitude || ["Enter a longitude ",<span>✅</span>]}</div>
+        <div className={validationErrors.longitude?"":"ready"}>{validationErrors.longitude || <>Enter a longitude <span>✅</span></>}</div>
       </div>
-      <input type="button" value="Submit" />
-    </div>
+      <input type="submit" value="Submit" onClick={() => handleSubmit(state, setState)} />
+
+      <p>Community Health Service Area: { chsaInfo() }</p>
+
+      { hideExtras() ?
+        null : 
+        <ErrorList>
+          {state.response.errors}
+        </ErrorList>
+      }
+
+    </form>
   </>);
 };
+
+function handleSubmit(state, setState) {
+
+  let submittedLatitude = state.latitude;
+  let submittedLongitude = state.longitude;
+
+  setState(current => {
+
+    getApiResponse(submittedLatitude, submittedLongitude).then(function(response) {
+      setState(current => ({ ...current, latitude: submittedLatitude, longitude: submittedLongitude, loading: false, response }));
+    });
+
+    return { ...current, submittedLatitude, submittedLongitude, loading: true };
+
+  });
+}
