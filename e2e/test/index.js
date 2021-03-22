@@ -53,15 +53,13 @@ describe('frontend', async () => {
     expect(title).to.not.equal("something else");
   });
 
-  it('should display a couple of form controls', async () => {
+  it('should display a couple of text inputs', async () => {
 
-    let controls = await page.evaluate(() => {
-      return document.querySelectorAll("input");
+    let numberOfControls = await page.evaluate(() => {
+      return document.querySelectorAll("input[type=text]").length;
     });
 
-    console.log(controls);
-
-    //throw "this one needs to fail";
+    expect(numberOfControls).to.equal(2);
 
   });
 
