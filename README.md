@@ -35,10 +35,9 @@ Running `dockker-compose up` will also start an API server. This server is start
     GET http://localhost:8888/api/v1/chsa
     {"success":false,"errors":["The following parameter is required: lat","The following parameter is required: lon"]}
 
-
 ## Tear Down
 
-To tear down, and thus destroy all associated docker containers, run `docker-compose down`. Note that the database volume will be preserved. If you would like to destroy the database completely (delete the volume on teardown), use `docker-compose down -v` instead.
+To tear down, and thus destroy all associated docker containers, run `docker-compose down`. Note that the database volume which tracks API call counts and times will be preserved. If you would like to destroy the database completely (delete the volume on teardown), use `docker-compose down -v` instead.
 
 ## Tracking API Calls
 
