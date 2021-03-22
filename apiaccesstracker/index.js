@@ -1,14 +1,28 @@
 const express = require('express');
 const app = express();
+const mysql = require('mysql');
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
+app.get("/accessevent", (req, res) => {
+
+  var connection = mysql.createConnection({
+    host     : process.env.MYSQL_HOST,
+    user     : process.env.MYSQL_USER,
+    password : process.env.MYSQL_PASSWORD,
+    database : process.env.MYSQL_DATABASE,
+    port     : process.env.MYSQL_PORT,
+  });
+
+  connection.connect();
+  connection.query("insert into accesslogs (time) values (now());", (err,results) => {
+    res.send("successfully posted access event");    
+    connection.end();    
+  });
+
 });
 
 app.listen(8080, () => {
   console.log("Listening on port 8080");
 });
-
 
 // handle sigint and sigterm gracefully
 

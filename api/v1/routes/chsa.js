@@ -16,6 +16,7 @@
 
 const { URLSearchParams } = require('url');
 const getChsaDataForLatLon = require('../lib/getchsadataforlatlon');
+const fetch = require('node-fetch');
 
 module.exports = {
   get: async (req, res) => {
@@ -73,7 +74,6 @@ module.exports = {
     if (!errors.length) {
 
       let { lat, lon } = processedQueryParams;
-
       let apiResult = await getChsaDataForLatLon(lat, lon);
 
       try {
@@ -81,19 +81,18 @@ module.exports = {
         if (!result.numberMatched) {
           err("That point appears to be outside of BC. Please choose a latitude/longitude combination that is inside of BC and ensure that the latitude and longitude values haven't accidentally been switched.");
         } else {
-          success = true;
+          if (result.features &&
+              result.features.length &&
+              result.features[0].properties &&
+              result.features[0].properties.CMNTY_HLTH_SERV_AREA_NAME) {
+            result = result.features[0].properties.CMNTY_HLTH_SERV_AREA_NAME;
+            success = true;
+          } else {
+            err("The upstream API returned an unexpected response. Please try again later or contact the website administrator.")
+          }
         }
       } catch (e) {
         err("An unknown error occurred."); // @todo the API probably returned XML instead, and that error message might be useful, but this is good enough for now
-      }
-
-      if (result.features &&
-          result.features.length &&
-          result.features[0].properties &&
-          result.features[0].properties.CMNTY_HLTH_SERV_AREA_NAME) {
-        result = result.features[0].properties.CMNTY_HLTH_SERV_AREA_NAME;
-      } else {
-        err("The upstream API returned an unexpected response. Please try again later or contact the website administrator.")
       }
     }
 

@@ -27,8 +27,6 @@ const fetch = require('node-fetch');
 async function getChsaDataForLatLon(lat, lon) {
   let params = new URLSearchParams;
 
-  console.log([lat, lon]);
-
   [
     ["service", "WFS"],
     ["version", "1.0.0"],

@@ -19,28 +19,27 @@ To run, use:
 
     docker-compose up
 
-The app will be available by default at http://localhost:8080. If the `PORT` environment variable is set, it will be avaialble at http://localhost:PORT. For example, with the following bash command, the app will be available at http://localhost:3000:
+The app will be available at http://localhost:8080. If the `MYCHSA_PORT` environment variable is set, it will be available at http://localhost:MYCHSA_PORT. For example, with the following bash command, the app will be available at http://localhost:3000:
 
-    PORT=3000 docker-compose up
+    MYCHSA_PORT=3000 docker-compose up
 
-To tear down, and thus destroy all associated docker containers - 
-including the database - run `docker-compose down`.
+To tear down, and thus destroy all associated docker containers, including the database, run `docker-compose down`.
 
 ## Tracking API Calls
 
 Every time the API is called, it records a timestamp in a mariadb database. After running
 `docker compose up`, you can query this database for total API calls using the following command:
 
-    docker-compose exec db mysql -uapiaccess -papiaccess apiaccess -e "select count(id) as 'API Calls' from accesslogs"
+    docker-compose exec db mysql -uapi -pchangeifyouwant api -e "select count(id) as 'API Calls' from accesslogs"
 
-This assumes that the password is unchanged from the application default of "apiaccess".
+This assumes that the password is unchanged from the application default of "changeifyouwant".
 If you are using a different password, please substitute accordingly.
 
 ## Application architecture
 
 This application is composed of the following high-level components. Each component
-is contained in its own docker container, which can be built and run
-independently, or as part of the `docker-compose` toolchain outlined above (unless otherwise indicated).
+is contained in its own docker container, which can either be built and run
+independently with ad hoc docker commands, or (unless otherwise indicated,) spun up and connected using the `docker-compose` toolchain outlined above.
 
  - [**api**](/api) - this API server, built on node/express, provides a thin wrapper
   (with additional, application specific validation features) around calls to the BC Open Maps public API. Given a latitude/longitude pair (geopoint), it identifies the intersecting CHSA.
@@ -51,6 +50,13 @@ independently, or as part of the `docker-compose` toolchain outlined above (unle
 
 In addition to the end to end tests, the api and frontend containers include 
 unit tests. These tests are written with mocha and chai.
+
+## Environment variables
+
+The build and run commands specified above are influenced by the following environment variables:
+
+  - `MYCHSA_MYSQL_PASSWORD` - Default value is `apiaccess`
+  - `MYCHSA_PORT` - Configures the port the web server is accessible from. Default value is `8080`
 
 ## Continuous integration
 
