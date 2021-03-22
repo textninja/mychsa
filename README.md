@@ -63,7 +63,7 @@ independently with ad hoc docker commands, or (except as indicated) be spun up a
  - [**frontend**](/frontend) - a React app bundled with webpack then deployed to a static apache server. Includes a couple of form controls to interact with the API.
  - [**e2e**](/e2e) - end to end tests for the frontend using a headless browser. Excluded from docker compose toolchain. Integration with Github Actions to follow.
 
-In addition to the end to end tests, the api and frontend containers include 
+In addition to the end to end tests, the api container includes 
 unit tests. These tests are written with mocha and chai.
 
 ## Environment variables
