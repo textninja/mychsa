@@ -24,10 +24,11 @@ services:
       - ./db/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/:ro
 
   frontend:
-    build: frontend
+    build: 
+      context: frontend
+      args:
+        API_URL: "${MYCHSA_API_URL}"
     restart: always
-    environment:
-      API_URL: "${MYCHSA_API_URL}"
     ports:
       - "${MYCHSA_PORT}:80"
     depends_on:

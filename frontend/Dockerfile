@@ -18,7 +18,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npx webpack
+ARG API_URL
+RUN API_URL="$API_URL" npm run build
 
 # Command to build and inspect:
 #

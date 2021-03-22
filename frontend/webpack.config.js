@@ -15,6 +15,7 @@
  */
 
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -33,6 +34,9 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.EnvironmentPlugin(['API_URL'])
+  ],
   devServer: {
     contentBase: path.join(__dirname, 'devpublic'),
     compress: true,
