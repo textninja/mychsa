@@ -34,7 +34,7 @@ describe('frontend', async () => {
 
     page = await browser.newPage();
 
-    await page.goto(targetUrl, { "waitUntil": "networkidle2" });
+    await page.goto(targetUrl, { "waitUntil": "networkidle2", timeout: 12000 });
 
   });
 
@@ -61,7 +61,7 @@ describe('frontend', async () => {
 
     console.log(controls);
 
-    throw "this one needs to fail";
+    //throw "this one needs to fail";
 
   });
 
