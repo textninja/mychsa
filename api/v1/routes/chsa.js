@@ -88,7 +88,7 @@ module.exports = {
       try {
         result = JSON.parse(apiResult);
         if (!result.numberMatched) {
-          err("That point appears to be outside of BC. Please choose a latitude/longitude combination that is inside of BC and ensure that the latitude and longitude values haven't accidentally been swapped.");
+          err("That point appears to be outside of BC. Please choose a latitude/longitude combination that is inside of BC, and ensure the latitude and longitude values haven't been swapped.");
         } else {
           if (result.features &&
               result.features.length &&
