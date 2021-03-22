@@ -27,9 +27,7 @@ In addition to the web client, an API server is started at on port 8888, unless 
 
 
     GET http://localhost:8888/api/v1/chsa?lat=34&lon=42
-
     {"success":false,"errors":["That point appears to be outside of BC. Please choose a latitude/longitude combination that is inside of BC and ensure that the latitude and longitude values haven't accidentally been switched."]}
-
 
     GET http://localhost:8888/api/v1/chsa?lat=49.2762041&lon=-123.1269395
     {"success":true,"result":"Downtown Vancouver"}
