@@ -54,7 +54,7 @@ If you are using a different password, please substitute accordingly; in general
 
 This application is composed of the following high-level components. Each component
 is contained in its own docker container, which can either be built and run
-independently with ad hoc docker commands, or (except as indicated) spun up and connected with one another using the `docker-compose` toolchain outlined above.
+independently with ad hoc docker commands, or (except as indicated) be spun up and connected with one another using the `docker-compose` toolchain outlined above.
 
  - [**api**](/api) - this API server, built on node/express, provides a thin wrapper
   (with additional, application specific validation features) around calls to the BC Open Maps public API. Given a latitude/longitude pair (geopoint), it identifies the intersecting CHSA.
