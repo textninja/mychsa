@@ -33,7 +33,7 @@ Every time the API is called, it records a timestamp in a mariadb database. Afte
     docker-compose exec db mysql -uapi -pchangeifyouwant api -e "select count(id) as 'API Calls' from accesslogs"
 
 This assumes that the password is unchanged from the application default of "changeifyouwant".
-If you are using a different password, please substitute accordingly; in general, inlining passwords in the shell is discouraged, so if you have configured a secure password then the recommended approach is to replace `-pchangeifyouwant` with `-p` (with no password specified) instead. You will be prompted for your password in a secure input.
+If you are using a different password, please substitute accordingly; in general, inlining passwords in the shell is discouraged, so if you have configured a secure password then the recommended approach is to replace `-pchangeifyouwant` with `-p` (that is, with no password specified). You will be prompted for your password in a secure input.
 
 ## Application architecture
 
@@ -55,7 +55,7 @@ unit tests. These tests are written with mocha and chai.
 
 The build and run commands specified above are influenced by the following environment variables:
 
-  - `MYCHSA_MYSQL_PASSWORD` - Default value is `apiaccess`
+  - `MYCHSA_MYSQL_PASSWORD` - Default value is `changeifyouwant`
   - `MYCHSA_PORT` - Configures the port the web server is accessible from. Default value is `8080`
 
 ## Continuous integration
