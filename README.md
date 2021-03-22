@@ -33,9 +33,7 @@ Every time the API is called, it records a timestamp in a mariadb database. Afte
     docker-compose exec db mysql -uapi -pchangeifyouwant api -e "select count(id) as 'API Calls' from accesslogs"
 
 This assumes that the password is unchanged from the application default of "changeifyouwant".
-If you are using a different password, please substitute accordingly; in general, inlining passwords in the shell is not recommended, so if you have configured a secure password then the recommended approach is to use the following command instead:
-
-    docker-compose exec db mysql -uapi -p api -e "select count(id) as 'API Calls' from accesslogs"
+If you are using a different password, please substitute accordingly; in general, inlining passwords in the shell is discouraged, so if you have configured a secure password then the recommended approach is to replace `-pchangeifyouwant` with `-p` (with no password specified) instead. You will be prompted for your password in a secure input.
 
 ## Application architecture
 
