@@ -78,7 +78,7 @@ The build and run commands specified above are influenced by the following envir
 
 ## Continuous integration
 
-Github actions are used to automatically run the unit tests and end to end tests on Github's CI/CD platform. In order to conserve build minutes, the CI action is configured to be run manually rather than on push.
+Github actions are used to automatically run the unit tests and end to end tests on Github's CI/CD platform.
 
 ## Planned improvements
 
